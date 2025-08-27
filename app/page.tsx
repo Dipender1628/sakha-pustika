@@ -1,0 +1,53 @@
+"use client"
+
+import { useState } from "react"
+import { Navigation } from "@/components/navigation"
+import { HomeSection } from "@/components/sections/home"
+import { VivekanandaSection } from "@/components/sections/vivekananda"
+import { SubhashitaSection } from "@/components/sections/subhashita"
+import { AmritVachanSection } from "@/components/sections/amrit-vachan"
+import { GeetSection } from "@/components/sections/geet"
+import { PrerakPrasangSection } from "@/components/sections/prerak-prasang"
+import { CharchaSection } from "@/components/sections/charcha"
+import { PanchParivartan } from "@/components/sections/panch-parivartan"
+
+export default function HomePage() {
+  const [activeSection, setActiveSection] = useState("home")
+
+  const renderSection = () => {
+    switch (activeSection) {
+      case "home":
+        return <HomeSection setActiveSection={setActiveSection}/>
+      case "vivekananda":
+        return <VivekanandaSection />
+      case "subhashita":
+        return <SubhashitaSection />
+      case "amrit-vachan":
+        return <AmritVachanSection />
+      case "geet":
+        return <GeetSection />
+      case "prerak-prasang":
+        return <PrerakPrasangSection />
+      case "charcha":
+        return <CharchaSection />
+      case "panch-parivartan":
+        return <PanchParivartan />
+      default:
+        return <HomeSection setActiveSection={setActiveSection}/>
+    }
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <Navigation activeSection={activeSection} onSectionChange={setActiveSection} />
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">{renderSection()}</main>
+      <footer className="bg-orange-600 text-white py-6 mt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-lg font-semibold">शाखा पुस्तिका</p>
+          <p className="text-orange-100">प्रीमियर संस्थान, हरियाणा प्रांत</p>
+          <p className="text-sm text-orange-200 mt-2">© 2024 सभी अधिकार सुरक्षित</p>
+        </div>
+      </footer>
+    </div>
+  )
+}
