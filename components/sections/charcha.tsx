@@ -106,7 +106,7 @@ CAA (मुसलमानों की नागरिकता चली ज�
 
   return (
     <div className="space-y-8">
-      <div className="text-center">
+      <div className="text-center mt-5">
         <h1 className="text-3xl font-bold text-orange-600 mb-4">चर्चा</h1>
         <p className="text-lg text-gray-600">विचारशील विषयों पर गहन चर्चा</p>
       </div>

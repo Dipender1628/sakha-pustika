@@ -31,7 +31,7 @@ export function PanchParivartan() {
 
   return (
     <div className="space-y-8">
-      <div className="text-center">
+      <div className="text-center mt-5">
         <h1 className="text-3xl font-bold text-orange-600 mb-4">पंच परिवर्तन</h1>
         <p className="text-lg text-gray-600">व्यक्तित्व और समाज के पांच आवश्यक परिवर्तन</p>
       </div>

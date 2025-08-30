@@ -27,7 +27,7 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
     <nav className="bg-orange-600 text-white shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 cursor-pointer" onClick={() => onSectionChange("home")}>
             <h1 className="text-xl font-bold">शाखा पुस्तिका</h1>
             <p className="text-sm text-orange-100">प्रीमियर संस्थान, हरियाणा प्रांत</p>
           </div>

@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export function PrerakPrasangSection() {
   const prasangs = [
@@ -39,7 +39,7 @@ export function PrerakPrasangSection() {
 
 उस कार्यक्रम में पूज्य डॉ हेडगेवार जी भी गए हुए थे। यह नजारा देख पूज्य डॉ हेडगेवार जी ने अपने एक परिचित को भिजवा कर चुना मंगवा लिया और पानदान में रख दिया।
 
-इस उदाहरण से यह प्रेरणा मिलती है, की कार्य करने से सम्पन्न होता है न की आज्ञा चलाने से। आज देश के लिए चिल्लाने वाले कितने ही लोग हैं, परंतु देश सेवा को अपना कार्य समझ कर निष्ठा से करने वाले काफी कम हैं। राष्ट्रीय स्वयंसेवक संघ के स्वयंसेवक इस प्रकार के नहीं होने चाहिये। स्वयंसेवक तो सच्ची निष्ठा से कार्य के प्रति प्रयत्नशील होने चाहिये।`,
+इस उदाहरण से यह प्रेरणा मिलती है कि कार्य करने से ही सपन्न होता है, न कि आडंबर करने से। आज देश के लिए चिल्लाने वाले कितने ही लोग हैं, परंतु देश सेवा को अपना कर्तव्य समझकर निष्ठा से करने वाले बहुत कम हैं। राष्ट्रीय स्वयंसेवक संघ के स्वयंसेवक इस प्रकार के नहीं होने चाहिए। स्वयंसेवक तो सच्ची निष्ठा से कार्य के प्रति सजग और सक्रिय होने चाहिए। यही ज्ञान पूज्य डॉ. हेडगेवार जी ने इस प्रसंग के उदाहरण से सभी स्वयंसेवकों को दिया।`,
     },
     {
       id: 4,
@@ -56,12 +56,14 @@ export function PrerakPrasangSection() {
 
 भाद्रपद शुक्ल 10 (5 सितम्बर, 1730) को प्रारम्भ हुआ यह बलिदान-पर्व 27 दिन तक चलता रहा। इस दौरान 363 लोगों ने बलिदान दिया। इनमें अमरती देवी की तीनों पुत्रियों सहित 69 महिलाएँ भी थी। अंततः राजा ने स्वयं आकर क्षमा मांगी और हरे पेड़ों को काटने पर प्रतिबंध लगा दिया। ग्रामवासियों को उससे कोई बैर तो था नहीं, उन्होने राजा को क्षमा कर दिया।`,
     },
-  ]
+  ];
 
   return (
     <div className="space-y-8">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold text-orange-600 mb-4">प्रेरक प्रसंग</h1>
+      <div className="text-center mt-5">
+        <h1 className="text-3xl font-bold text-orange-600 mb-4">
+          प्रेरक प्रसंग
+        </h1>
         <p className="text-lg text-gray-600">जीवन की प्रेरणादायक घटनाएं</p>
       </div>
 
@@ -69,16 +71,20 @@ export function PrerakPrasangSection() {
         {prasangs.map((prasang) => (
           <Card key={prasang.id} className="hover:shadow-lg transition-shadow">
             <CardHeader>
-              <CardTitle className="text-xl text-orange-600">{prasang.title}</CardTitle>
+              <CardTitle className="text-xl text-orange-600">
+                {prasang.title}
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg">
-                <p className="text-gray-800 leading-relaxed whitespace-pre-line">{prasang.content}</p>
+                <p className="text-gray-800 leading-relaxed whitespace-pre-line">
+                  {prasang.content}
+                </p>
               </div>
             </CardContent>
           </Card>
         ))}
       </div>
     </div>
-  )
+  );
 }

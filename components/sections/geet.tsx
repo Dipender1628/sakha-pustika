@@ -104,7 +104,7 @@ export function GeetSection() {
 
   return (
     <div className="space-y-8">
-      <div className="text-center">
+      <div className="text-center mt-5">
         <h1 className="text-3xl font-bold text-orange-600 mb-4">गीत</h1>
         <p className="text-lg text-gray-600">देशभक्ति और प्रेरणा के गीत</p>
       </div>
