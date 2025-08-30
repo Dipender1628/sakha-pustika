@@ -57,7 +57,7 @@ export default function HomePage() {
           <p className="text-lg font-semibold">शाखा पुस्तिका</p>
           <p className="text-orange-100">प्रीमियर संस्थान, हरियाणा प्रांत</p>
           <p className="text-sm text-orange-200 mt-2">
-            © 2024 सभी अधिकार सुरक्षित
+            © 2025 सभी अधिकार सुरक्षित
           </p>
         </div>
       </footer>
