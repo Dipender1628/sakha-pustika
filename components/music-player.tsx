@@ -93,29 +93,57 @@ export function MusicPlayer() {
 
   // Start music on first user interaction (click anywhere on page)
   useEffect(() => {
+    let hasStarted = false
+    
     const handleFirstInteraction = () => {
-      if (!hasTriedAutoPlay.current) {
+      if (!hasStarted && audioRef.current) {
+        hasStarted = true
         hasTriedAutoPlay.current = true
-        setIsPlaying(true)
+        // Start music immediately on first interaction
+        audioRef.current.play()
+          .then(() => {
+            setIsPlaying(true)
+          })
+          .catch(() => {
+            setIsPlaying(false)
+          })
       }
     }
 
-    // Listen for any user interaction
-    document.addEventListener("click", handleFirstInteraction, { once: true })
-    document.addEventListener("touchstart", handleFirstInteraction, { once: true })
-    document.addEventListener("keydown", handleFirstInteraction, { once: true })
+    // Listen for any user interaction - use capture phase to catch early
+    const options = { once: true, capture: true }
+    document.addEventListener("click", handleFirstInteraction, options)
+    document.addEventListener("touchstart", handleFirstInteraction, options)
+    document.addEventListener("keydown", handleFirstInteraction, options)
+    document.addEventListener("mousedown", handleFirstInteraction, options)
 
     return () => {
-      document.removeEventListener("click", handleFirstInteraction)
-      document.removeEventListener("touchstart", handleFirstInteraction)
-      document.removeEventListener("keydown", handleFirstInteraction)
+      document.removeEventListener("click", handleFirstInteraction, { capture: true })
+      document.removeEventListener("touchstart", handleFirstInteraction, { capture: true })
+      document.removeEventListener("keydown", handleFirstInteraction, { capture: true })
+      document.removeEventListener("mousedown", handleFirstInteraction, { capture: true })
     }
   }, [])
 
-  // Handle button click - simply toggle state
+  // Handle button click - start music if not started, otherwise toggle
   const handleToggle = () => {
-    console.log("Button clicked! Toggling from:", isPlaying, "to:", !isPlaying)
-    setIsPlaying((prev) => !prev)
+    const audio = audioRef.current
+    if (!audio) return
+
+    // If music hasn't started yet, start it
+    if (!hasTriedAutoPlay.current) {
+      hasTriedAutoPlay.current = true
+      audio.play()
+        .then(() => {
+          setIsPlaying(true)
+        })
+        .catch(() => {
+          setIsPlaying(false)
+        })
+    } else {
+      // Toggle play/pause
+      setIsPlaying((prev) => !prev)
+    }
   }
 
   return (
