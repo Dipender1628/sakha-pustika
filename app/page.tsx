@@ -9,6 +9,7 @@ import { GeetSection } from "@/components/sections/geet";
 import { PrerakPrasangSection } from "@/components/sections/prerak-prasang";
 import { CharchaSection } from "@/components/sections/charcha";
 import { PanchParivartan } from "@/components/sections/panch-parivartan";
+import { MusicPlayer } from "@/components/music-player";
 
 export default function HomePage() {
   const [activeSection, setActiveSection] = useState("home");
@@ -61,6 +62,7 @@ export default function HomePage() {
           </p>
         </div>
       </footer>
+      <MusicPlayer />
     </div>
   );
 }

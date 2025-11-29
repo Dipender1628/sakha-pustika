@@ -13,6 +13,9 @@ export const metadata: Metadata = {
   title: "शाखा पुस्तिका - प्रीमियर संस्थान",
   description: "शाखा पुस्तिका - प्रीमियर संस्थान, हरियाणा प्रांत",
   generator: "v0.app",
+  icons: {
+    icon: "/placeholder-logo.svg",
+  },
 }
 
 export default function RootLayout({
