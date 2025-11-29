@@ -8,22 +8,25 @@ export function MusicPlayer() {
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const hasTriedAutoPlay = useRef(false)
 
-  // Initialize audio properties
+  // Initialize audio and start playing automatically on site load
   useEffect(() => {
     const audio = audioRef.current
     if (!audio) return
 
+    // Set audio properties
     audio.loop = true
     audio.volume = 0.35
 
     // Sync state with audio events
     const handlePlay = () => {
       setIsPlaying(true)
-     
+      // Skip first 11 seconds, start from 12 seconds
+      if (audio.currentTime < 12) {
+        audio.currentTime = 12
+      }
     }
     const handlePause = () => {
       setIsPlaying(false)
-     
     }
     const handleEnded = () => {
       setIsPlaying(false)
@@ -34,28 +37,45 @@ export function MusicPlayer() {
     audio.addEventListener("pause", handlePause)
     audio.addEventListener("ended", handleEnded)
 
-    // Try auto-play when audio is ready (may be blocked by browser)
+    // Try to auto-play immediately when audio is ready
     const tryAutoPlay = () => {
       if (hasTriedAutoPlay.current) return
+      hasTriedAutoPlay.current = true
+      
+      // Set start time to 12 seconds before playing
+      audio.currentTime = 12
       
       audio.play()
         .then(() => {
-          hasTriedAutoPlay.current = true
           setIsPlaying(true)
+          // Ensure we're at 12 seconds
+          if (audio.currentTime < 12) {
+            audio.currentTime = 12
+          }
         })
         .catch(() => {
-          // Autoplay blocked - this is normal, will start on first user click
+          // Autoplay blocked by browser - user will need to click button
           setIsPlaying(false)
         })
     }
 
-    // Try to play when audio is ready
-    if (audio.readyState >= 2) {
-      tryAutoPlay()
-    } else {
-      audio.addEventListener("canplay", tryAutoPlay, { once: true })
-      audio.addEventListener("loadeddata", tryAutoPlay, { once: true })
-      audio.addEventListener("canplaythrough", tryAutoPlay, { once: true })
+    // Try multiple strategies to start audio
+    const startAudio = () => {
+      if (audio.readyState >= 2) {
+        tryAutoPlay()
+      } else {
+        audio.addEventListener("canplay", tryAutoPlay, { once: true })
+        audio.addEventListener("loadeddata", tryAutoPlay, { once: true })
+        audio.addEventListener("canplaythrough", tryAutoPlay, { once: true })
+      }
+    }
+
+    // Try immediately
+    startAudio()
+
+    // Also try when window loads
+    if (typeof window !== 'undefined') {
+      window.addEventListener("load", startAudio, { once: true })
     }
 
     return () => {
@@ -66,6 +86,9 @@ export function MusicPlayer() {
       audio.removeEventListener("canplay", tryAutoPlay)
       audio.removeEventListener("loadeddata", tryAutoPlay)
       audio.removeEventListener("canplaythrough", tryAutoPlay)
+      if (typeof window !== 'undefined') {
+        window.removeEventListener("load", startAudio)
+      }
     }
   }, [])
 
@@ -75,14 +98,22 @@ export function MusicPlayer() {
     if (!audio) return
 
     if (isPlaying) {
+      // Set start time to 12 seconds before playing
+      if (audio.currentTime < 12) {
+        audio.currentTime = 12
+      }
+      
       const playPromise = audio.play()
       if (playPromise !== undefined) {
         playPromise
           .then(() => {
-            // Audio started successfully
+            // Ensure we're at 12 seconds
+            if (audio.currentTime < 12) {
+              audio.currentTime = 12
+            }
           })
-          .catch((error) => {
-            // Silently handle autoplay blocking - this is normal browser behavior
+          .catch(() => {
+            // Silently handle autoplay blocking
             setIsPlaying(false)
           })
       }
@@ -91,59 +122,9 @@ export function MusicPlayer() {
     }
   }, [isPlaying])
 
-  // Start music on first user interaction (click anywhere on page)
-  useEffect(() => {
-    let hasStarted = false
-    
-    const handleFirstInteraction = () => {
-      if (!hasStarted && audioRef.current) {
-        hasStarted = true
-        hasTriedAutoPlay.current = true
-        // Start music immediately on first interaction
-        audioRef.current.play()
-          .then(() => {
-            setIsPlaying(true)
-          })
-          .catch(() => {
-            setIsPlaying(false)
-          })
-      }
-    }
-
-    // Listen for any user interaction - use capture phase to catch early
-    const options = { once: true, capture: true }
-    document.addEventListener("click", handleFirstInteraction, options)
-    document.addEventListener("touchstart", handleFirstInteraction, options)
-    document.addEventListener("keydown", handleFirstInteraction, options)
-    document.addEventListener("mousedown", handleFirstInteraction, options)
-
-    return () => {
-      document.removeEventListener("click", handleFirstInteraction, { capture: true })
-      document.removeEventListener("touchstart", handleFirstInteraction, { capture: true })
-      document.removeEventListener("keydown", handleFirstInteraction, { capture: true })
-      document.removeEventListener("mousedown", handleFirstInteraction, { capture: true })
-    }
-  }, [])
-
-  // Handle button click - start music if not started, otherwise toggle
+  // Handle button click - toggle play/pause
   const handleToggle = () => {
-    const audio = audioRef.current
-    if (!audio) return
-
-    // If music hasn't started yet, start it
-    if (!hasTriedAutoPlay.current) {
-      hasTriedAutoPlay.current = true
-      audio.play()
-        .then(() => {
-          setIsPlaying(true)
-        })
-        .catch(() => {
-          setIsPlaying(false)
-        })
-    } else {
-      // Toggle play/pause
-      setIsPlaying((prev) => !prev)
-    }
+    setIsPlaying((prev) => !prev)
   }
 
   return (
@@ -157,13 +138,13 @@ export function MusicPlayer() {
       <button
         onClick={handleToggle}
         type="button"
-        className="fixed bottom-6 right-6 z-50 rounded-full w-14 h-14 shadow-lg bg-orange-600 hover:bg-orange-700 active:bg-orange-800 text-white flex items-center justify-center cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+        className="fixed bottom-6 right-6 z-50 rounded-full w-12 h-12 shadow-lg backdrop-blur-md bg-orange-600/30 border border-orange-400/50 hover:bg-orange-600/40 active:bg-orange-600/50 text-white flex items-center justify-center cursor-pointer transition-all focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2"
         aria-label={isPlaying ? "Stop music" : "Start music"}
       >
         {isPlaying ? (
-          <VolumeX className="w-6 h-6 pointer-events-none" /> // F1 mute icon - music is PLAYING, click to STOP
+          <VolumeX className="w-5 h-5 pointer-events-none" /> // F1 mute icon - music is PLAYING, click to STOP
         ) : (
-          <Volume2 className="w-6 h-6 pointer-events-none" /> // F3 sound icon - music is STOPPED, click to START
+          <Volume2 className="w-5 h-5 pointer-events-none" /> // F3 sound icon - music is STOPPED, click to START
         )}
       </button>
     </>
