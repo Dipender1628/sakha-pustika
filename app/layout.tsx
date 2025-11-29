@@ -16,9 +16,16 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/indian_flag.ico", sizes: "32x32", type: "image/x-icon" },
+      { url: "/indian_flag.ico", sizes: "16x16", type: "image/x-icon" },
     ],
     shortcut: "/indian_flag.ico",
     apple: "/indian_flag.ico",
+    other: [
+      {
+        rel: "apple-touch-icon-precomposed",
+        url: "/indian_flag.ico",
+      },
+    ],
   },
 }
 
