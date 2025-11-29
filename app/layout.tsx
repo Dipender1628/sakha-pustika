@@ -14,7 +14,11 @@ export const metadata: Metadata = {
   description: "शाखा पुस्तिका - प्रीमियर संस्थान, हरियाणा प्रांत",
   generator: "v0.app",
   icons: {
-    icon: "/indian_flag.ico",
+    icon: [
+      { url: "/indian_flag.ico", sizes: "32x32", type: "image/x-icon" },
+    ],
+    shortcut: "/indian_flag.ico",
+    apple: "/indian_flag.ico",
   },
 }
 
