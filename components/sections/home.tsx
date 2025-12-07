@@ -1,12 +1,12 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import img1 from "@/public/vivekanand.jpg";
-import img2 from "@/public/dayanand ji.jpg";
-import img3 from "@/public/amritvachan.jpg";
-import img4 from "@/public/valmiki ji.jpg";
-import img5 from "@/public/gangadhar ji.jpg";
-import img6 from "@/public/dronacharya ji.jpg";
-import img7 from "@/public/gobindisnghji.jpg";
+import img2 from "@/public/netaji_subhash.jpeg";
+import img3 from "@/public/Sardar Patel.jpeg";
+import img4 from "@/public/rishi_agastya.jpeg";
+import img5 from "@/public/sukhdev_ji.jpeg";
+import img6 from "@/public/bhagat_singh_ji.jpeg";
+import img7 from "@/public/rani_laxmibai_ji.jpeg";
 import bgimage from "@/public/bgimage.jpg";
 import Image from "next/image";
 export function HomeSection({
