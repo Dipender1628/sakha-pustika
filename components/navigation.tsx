@@ -29,7 +29,7 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0 cursor-pointer" onClick={() => onSectionChange("home")}>
             <h1 className="text-xl font-bold">शाखा पुस्तिका</h1>
-            <p className="text-sm text-orange-100">प्रीमियर संस्थान, हरियाणा प्रांत</p>
+            <p className="text-sm text-orange-100">दिसम्बर 2025- feb 2026</p>
           </div>
 
           {/* Desktop Navigation */}

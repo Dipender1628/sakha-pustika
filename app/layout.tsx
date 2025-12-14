@@ -10,8 +10,8 @@ const notoSansDevanagari = Noto_Sans_Devanagari({
 })
 
 export const metadata: Metadata = {
-  title: "शाखा पुस्तिका - प्रीमियर संस्थान",
-  description: "शाखा पुस्तिका - प्रीमियर संस्थान, हरियाणा प्रांत",
+  title: "शाखा पुस्तिका",
+  description: "शाखा पुस्तिका - दिसम्बर 2025- feb 2026",
   generator: "v0.app",
   icons: {
     icon: [

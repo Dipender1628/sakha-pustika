@@ -56,7 +56,7 @@ export default function HomePage() {
       <footer className="bg-orange-600 text-white py-6 mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-lg font-semibold">शाखा पुस्तिका</p>
-          <p className="text-orange-100">प्रीमियर संस्थान, हरियाणा प्रांत</p>
+          <p className="text-orange-100">दिसम्बर 2025- feb 2026</p>
           <p className="text-sm text-orange-200 mt-2">
             © 2025 सभी अधिकार सुरक्षित
           </p>
