@@ -7,7 +7,7 @@ import img4 from "@/public/rishi_agastya.jpeg";
 import img5 from "@/public/sukhdev_ji.jpeg";
 import img6 from "@/public/bhagat_singh_ji.jpeg";
 import img7 from "@/public/rani_laxmibai_ji.jpeg";
-import bgimage from "@/public/bgimage.jpg";
+import bgimage from "@/public/bg.jpeg";
 import Image from "next/image";
 export function HomeSection({
   setActiveSection,
